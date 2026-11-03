@@ -1,20 +1,155 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="da">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navn</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<script src="js/weather.js"></script>
-<body>
-    <h1>Velkommen til Navn</h1>
-    <p>Din personlige vejr- og tøjrådgiver</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather | Dashboard</title>
 
-    <h2>Find vejret i din by</h2>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/weather.js" defer></script>
+  </head>
 
-    <button id="searchButton">Søg efter lokal vejr</button>
+  <body>
+    <!-- NAVIGATION -->
+    <header class="sidehoved">
+      <nav class="navigation">
+        <a href="index.html" class="logo"> ☁ Weather </a>
 
-    <div id="weatherResult"></div>"
-</body>
+        <a href="profile.html" class="profil-knap"> Profil </a>
+      </nav>
+    </header>
+
+    <!-- HOVEDINDHOLD MED DYNAMISK VEJRBAGGRUND -->
+    <main id="vejrBaggrund" class="vejr-baggrund">
+      <!-- VELKOMST -->
+      <section class="velkomst-sektion">
+        <h1>Velkommen til Weather</h1>
+
+        <p>Få det aktuelle vejr og personlige tøjanbefalinger.</p>
+      </section>
+
+      <!-- SØG EFTER BY -->
+      <section class="søg-sektion">
+        <form id="vejrSøgning">
+          <input
+            type="text"
+            id="byInput"
+            placeholder="Indtast en by (fx. Aarhus)"
+            aria-label="Indtast en by"
+            required />
+
+          <button type="submit" id="søgKnap">Søg</button>
+        </form>
+      </section>
+
+      <!-- DASHBOARD -->
+      <section class="dashboard">
+        <!-- AKTUELT VEJR -->
+        <article class="vejr-kort">
+          <h2>
+            Vejret i
+            <span id="byNavn">Aarhus</span>
+          </h2>
+
+          <p id="sidstOpdateret">Opdateret: --</p>
+
+          <div class="vejr-information">
+            <!-- TEMPERATUR -->
+            <div class="temperatur-sektion">
+              <img id="vejrIkon" src="" alt="Aktuelt vejrikon" hidden />
+
+              <h3 id="temperatur">--°C</h3>
+
+              <p id="vejrBeskrivelse">Indlæser vejr...</p>
+            </div>
+
+            <!-- VEJRDETALJER -->
+            <div class="vejr-detaljer">
+              <p>
+                Vind:
+                <span id="vindHastighed">--</span>
+                km/t
+              </p>
+
+              <p>
+                Nedbør:
+                <span id="nedbør">--</span>
+                mm
+              </p>
+
+              <p>
+                Luftfugtighed:
+                <span id="luftfugtighed">--</span>%
+              </p>
+            </div>
+          </div>
+
+          <div id="vejrResultat" aria-live="polite"></div>
+        </article>
+
+        <!-- TØJANBEFALING MED BAMSE -->
+        <article class="tøj-kort">
+          <h2>Tøjanbefaling</h2>
+
+          <p>Baseret på vejret og dine præferencer</p>
+
+          <div class="bamse-container">
+            <img
+              <img
+                id="tøjBamse"
+                src="assets/bears/bamse_hoodie_jeans 1.webp"
+                alt="Bamse med tøj passende til vejret" />
+          </div>
+
+          <p id="tøjAnbefaling">Her vises det passende tøj til dig.</p>
+        </article>
+      </section>
+
+      <!-- NEDERSTE INFORMATIONSKORT -->
+      <section class="information-sektion">
+        <!-- DAGENS OVERBLIK -->
+        <article class="overblik-kort">
+          <h2>Dagens overblik</h2>
+
+          <div class="dagens-overblik">
+            <div class="overblik-element">
+              <span>Nu</span>
+
+              <p id="temperaturNu">--°C</p>
+            </div>
+
+            <div class="overblik-element">
+              <span>I dag</span>
+
+              <p id="temperaturDag">--°C</p>
+            </div>
+
+            <div class="overblik-element">
+              <span>I aften</span>
+
+              <p id="temperaturAften">--°C</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- TØJSTIL -->
+        <article class="tøjstil-kort">
+          <h2>Tøjstil</h2>
+
+          <p>Din valgte stil</p>
+
+          <span id="valgtTøjstil"> Casual </span>
+        </article>
+
+        <!-- PLACERING -->
+        <article class="placering-kort">
+          <h2>Placering</h2>
+
+          <p>Din standardby</p>
+
+          <span id="standardBy"> Ikke valgt </span>
+        </article>
+      </section>
+    </main>
+  </body>
 </html>
