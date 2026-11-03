@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html lang="da">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navn</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<script src="js/weather.js"></script>
+<script src="js/weather.js" defer></script>
+
 <body>
     <h1>Velkommen til Navn</h1>
     <p>Din personlige vejr- og tøjrådgiver</p>
 
-    <h2>Find vejret i din by</h2>
+    <h1>Vejret i <span id="city">...</span></h1>
 
-    <button id="searchButton">Søg efter lokal vejr</button>
+    <form id="search-form">
+        <input id="city-input" placeholder="Indtast en by (fx. Aarhus)" />
+        <button type="submit">Søg</button>
+    </form>
 
-    <div id="weatherResult"></div>"
+    <p id="status"></p>
+
+    <section id="weather" hidden>
+        <p id="icon"></p>
+        <p id="temp"></p>
+        <p id="description"></p>
+        <ul>
+            <li>Vind: <span id="wind"></span></li>
+            <li>Luftfugtighed: <span id="humidity"></span></li>
+            <li>Regnrisiko: <span id="rain-risk"></span></li>
+        </ul>
+    </section>
+
+    <script src="weather.js"></script>
 </body>
+
 </html>
