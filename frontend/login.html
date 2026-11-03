@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>VejrApp - Log ind</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+    <main class="login-container">
+
+         <section class="bear-section">
+
+            <div class="weahter-icon sun">☀️</div>
+            <div class="weather-icon rain">🌧️</div>
+            <div class="weather-icon snow">❄️</div>
+
+            <img src="images/bamse.png"
+                 alt="VejrApp bamse"
+                 class="bear-image">
+
+                 <div class="bear-text">
+                    <h2>Klar til dagens vejr?</h2>
+                    <p>Vores bamse hjælper dig med at vælge det rigtige tøj til vejret!</p>
+                 </div>
+         </section>
+
+        <section class="form-section">
+
+            <div class="login-card">
+
+                <div class="login-card">
+
+                   <div class="logo">
+                   <span>🌤️</span>
+                  <h1>VejrApp</h1>
+                  </div>
+
+               <h2 id="formTitle">Velkommen!</h2>
+
+    <p class="subtitle" id="formSubtitle">
+        Dit simple vejr- og tøjtjek.
+    </p>
+
+    <form id="loginForm">
+
+        <label for="name">Dit navn</label>
+
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Indtast dit navn"
+            autocomplete="name"
+            required
+        >
+
+        <button type="submit" id="submitButton">
+            Log ind
+        </button>
+
+    </form>
+
+    <p id="formMessage" class="form-message"></p>
+
+    <div class="register-section">
+
+        <p id="switchText">
+            Har du ikke en bruger endnu?
+        </p>
+
+        <button type="button" id="switchButton">
+            Opret bruger
+        </button>
+
+    </div>
+
+    <p class="login-info">
+        Ingen adgangskode nødvendig 
+    </p>
+
+</div>
+
+        </section>
+
+    </main>
+
+    <script src="js/login.js"></script>
+  
+    </main>
+
+
+</body>
+</html>
