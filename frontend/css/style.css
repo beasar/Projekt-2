@@ -35,12 +35,14 @@ h1 {
 }
 
 p {
-    color: #49392F;
+    color: #000000;
     font-family: "Iosevka Charon", sans-serif;
     font-size: 17px;
     font-weight: 500;
     line-height: 1.7;
 }
+
+
 
 input {
     padding: 12px;
@@ -81,14 +83,13 @@ button:active {
 .dashboard-sections {
     display: flex;
     gap: 30px;
-    justify-content: center;
-    align-items: stretch;
+    justify-content: flex-start;
     width: 800px;
     max-width: 90%;
     margin: 30px auto;
 }
 
-.weather-card,
+
 .clothing-card {
     flex: 1;
     min-width: 0;
