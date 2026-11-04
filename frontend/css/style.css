@@ -2,20 +2,44 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: "Iosevka Charon";
+    src: url("../fonts/iosevka-charon/static/iosevka-charon-latin-400-normal.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+    
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Iosevka Charon", Arial, sans-serif;
     background-color: #f1f5f9;
-    background-image: url("baggrund_dagsolskin.png");
+    background-image: url("../images/baggrund_dagsolskin.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    min-height: 100vh;
     margin: 0;
-    padding: 40px;
     color: #1e293b;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;    
+    text-align: center;
 }
 
 h1 {
-    color: #2563eb;
+    color: #795638;
+    font-family: "Iosevka Charon", sans-serif;
+    font-weight: 700;
+    text-shadow: 2px 2px 0px #E8B85C;
+}
+
+p {
+    color: #49392F;
+    font-family: "Iosevka Charon", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.7;
 }
 
 input {
@@ -26,14 +50,81 @@ input {
 }
 
 button {
-    padding: 12px 20px;
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 6px;
+    padding: 12px 25px;
+    background-color: #E8B85C;
+    color: #5B4636;
+    border: 2px solid #C99543;
+    border-radius: 16px;
     cursor: pointer;
+
+    font-family: "Iosevka Charon", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+
+    box-shadow: 0 4px 0 #B98235;
+    transition: all 0.2s ease;
 }
 
 button:hover {
-    background-color: #1d4ed8;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 0 #B98235;
+    background-color: #F2C978;
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #B98235;
+}
+
+/* Dashboard-sektioner */ 
+
+.dashboard-sections {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: stretch;
+    width: 800px;
+    max-width: 90%;
+    margin: 30px auto;
+}
+
+.weather-card,
+.clothing-card {
+    flex: 1;
+    min-width: 0;
+    box-sizing: border-box;
+
+    padding: 28px;
+    border-radius: 24px;
+
+    background: rgba(161, 189, 201, 0.5);
+
+    border: 3px solid #F5E5C5;
+
+    box-shadow:
+        0 6px 0 #8CAAB5,
+        0 10px 20px rgba(65, 75, 75, 0.12);
+
+    transition: transform 0.25s ease;
+}
+
+
+
+/* Bamsens placering */
+.bear-image {
+    position: fixed;
+    right: 3%;
+    bottom: 0;
+    width: 600px;
+    max-height: 65vh;
+    z-index: 10;
+    transform: scaleX(-1);
+}
+
+/* Bamsens størrelse */
+#bear-image {
+    width: 100%;
+    height: auto;
+    max-height: 65vh;
+    object-fit: contain;
 }

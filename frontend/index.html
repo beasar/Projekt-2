@@ -22,16 +22,42 @@
 
     <p id="status"></p>
 
-    <section id="weather" hidden>
+<!-- Vejr og tøjanbefaling -->
+<div class="dashboard-sections">
+
+    <!-- Vejrdata -->
+    <section id="weather" class="weather-card" hidden>
+        <h2>Vejret i dag</h2>
         <p id="icon"></p>
         <p id="temp"></p>
         <p id="description"></p>
+
         <ul>
             <li>Vind: <span id="wind"></span></li>
             <li>Luftfugtighed: <span id="humidity"></span></li>
             <li>Regnrisiko: <span id="rain-risk"></span></li>
         </ul>
     </section>
+
+    <!-- Tøjanbefaling -->
+    <section id="clothing-advice" class="clothing-card">
+        <h2>Tøjanbefaling</h2>
+
+        <div class="bear-image">
+            <img src="images/bamse_shorts-tshirt.png"
+                 alt="Bamse med shorts og t-shirt"
+                 id="bear-image">
+        </div>
+
+        <div class="advice-text">
+            <h3>Bamsens anbefaling</h3>
+            <p id="clothing-text">Husk solcremen i dag!</p>
+        </div>
+    </section>
+
+</div>
+
+</section>
 
     <script src="weather.js"></script>
 </body>
