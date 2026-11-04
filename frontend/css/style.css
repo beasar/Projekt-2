@@ -5,6 +5,10 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f1f5f9;
+    background-image: url('../images/baggrun_dagsolskin.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     margin: 0;
     padding: 40px;
     color: #1e293b;
