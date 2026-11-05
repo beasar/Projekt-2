@@ -1,33 +1,33 @@
-import { getClothingRecommendation } from "./clothing.js";
+import { getClothingRecommendation, vælgBamse } from "./clothing.js";
 
-const key = 'fb005a8552253eeee41503852feb5117';
+const key = "fb005a8552253eeee41503852feb5117";
 const url = "https://api.openweathermap.org/data/2.5";
 
 const statusEl = document.querySelector("#status");
 const weatherEl = document.querySelector("#weather");
 
 function getIcon(main, temp, iconCode) {
-    const isNight = iconCode.endsWith("n");
+  const isNight = iconCode.endsWith("n");
 
-    switch (main) {
-        case "Clear":
-            return isNight ? "🌙" : "☀️";
-        case "Clouds":
-            return temp < 10 ? "☁️" : "⛅";
-        case "Rain":
-        case "Drizzle":
-            return "🌧️";
-        case "Thunderstorm":
-            return "⛈️";
-        case "Snow":
-            return "❄️";
-        case "Mist":
-        case "Fog":
-        case "Haze":
-            return "🌫️";
-        default:
-            return "🌡️";
-    }
+  switch (main) {
+    case "Clear":
+      return isNight ? "🌙" : "☀️";
+    case "Clouds":
+      return temp < 10 ? "☁️" : "⛅";
+    case "Rain":
+    case "Drizzle":
+      return "🌧️";
+    case "Thunderstorm":
+      return "⛈️";
+    case "Snow":
+      return "❄️";
+    case "Mist":
+    case "Fog":
+    case "Haze":
+      return "🌫️";
+    default:
+      return "🌡️";
+  }
 }
 
 async function getWeather(query) {
@@ -57,6 +57,16 @@ async function getWeather(query) {
         console.error(error);
         statusEl.textContent = "Kunne ikke hente vejret.";
     }
+
+    const current = await currentRes.json();
+    const forecast = await forecastRes.json();
+
+    renderWeather(current, forecast);
+    statusEl.textContent = "";
+  } catch (error) {
+    console.error(error);
+    statusEl.textContent = "Kunne ikke hente vejret.";
+  }
 }
 
 function renderWeather(current, forecast) {
@@ -81,6 +91,10 @@ function renderWeather(current, forecast) {
 
     renderTitle(current, offset);
     renderForecast(slots, offset);
+
+    // Opdaterer bamsens billede efter temperatur og vejr
+    const bamseBillede = vælgBamse(temp, main);
+    document.querySelector("#bear-image").src = bamseBillede;
 
     weatherEl.hidden = false;
 }
@@ -107,23 +121,24 @@ function renderForecast(slots, offset) {
 }
 
 function getWeatherFromLocation() {
-    if (!("geolocation" in navigator)) {
-        statusEl.textContent = "Din browser understøtter ikke lokation. Indtast en by.";
-        return;
-    }
+  if (!("geolocation" in navigator)) {
+    statusEl.textContent =
+      "Din browser understøtter ikke lokation. Indtast en by.";
+    return;
+  }
 
-    statusEl.textContent = "Henter din lokation...";
+  statusEl.textContent = "Henter din lokation...";
 
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-            const { latitude, longitude } = position.coords;
-            getWeather(`lat=${latitude}&lon=${longitude}`);
-        },
-        () => {
-            statusEl.textContent = "Lokation er ikke tilgængelig. Indtast en by.";
-        },
-        { timeout: 10000 }
-    );
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const { latitude, longitude } = position.coords;
+      getWeather(`lat=${latitude}&lon=${longitude}`);
+    },
+    () => {
+      statusEl.textContent = "Lokation er ikke tilgængelig. Indtast en by.";
+    },
+    { timeout: 10000 },
+  );
 }
 
 function toLocal(timestamp, offset) {
@@ -171,11 +186,11 @@ function renderTitle(current, offset) {
 }
 
 document.querySelector("#search-form").addEventListener("submit", (event) => {
-    event.preventDefault();
-    const city = document.querySelector("#city-input").value.trim();
-    if (city) {
-        getWeather(`q=${encodeURIComponent(city)}`);
-    }
+  event.preventDefault();
+  const city = document.querySelector("#city-input").value.trim();
+  if (city) {
+    getWeather(`q=${encodeURIComponent(city)}`);
+  }
 });
 
 getWeatherFromLocation();
