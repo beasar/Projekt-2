@@ -8,65 +8,55 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<script src="js/weather.js" defer></script>
 
 <body>
     <!-- Header m. titel og søgeformular-->
-   <header class="main-header">
-    <h1>Velkommen til Navn</h1>
-    <p>Vejret fortalt med lidt ekstra varme</p>
+    <header class="main-header">
+        <h1>Velkommen til Navn</h1>
+        <p>Vejret fortalt med lidt ekstra varme</p>
 
-    <!--Søgeformular for byer-->
-    <form id="search-form">
-        <input id="city-input" placeholder="Indtast en by (fx. Aarhus)" />
-        <button type="submit">Søg</button>
-    </form>
+        <!--Søgeformular for byer-->
+        <form id="search-form">
+            <input id="city-input" placeholder="Indtast en by (fx. Aarhus)" />
+            <button type="submit">Søg</button>
+        </form>
 
-    <p id="status"></p>
-</header>
-<!-- Bynavn -->
+        <p id="status"></p>
+    </header>
+    <!-- Bynavn -->
     <h1><span id="city">...</span></h1>
-     <!-- Vejrdata -->
+    <!-- Vejrdata -->
     <section id="weather" class="weather-card" hidden>
-        
+
 
         <div class="weather-icon">
-        <p id="temp"></p>
-        <p id="icon"></p>
-        <p id="description"></p>
+            <p id="temp"></p>
+            <p id="icon"></p>
+            <p id="description"></p>
         </div>
 
-          <ul class="weather-details">
-        <li>Vind: <span id="wind"></span></li>
-        <li>Luftfugtighed: <span id="humidity"></span></li>
-        <li>Regnrisiko: <span id="rain-risk"></span></li>
-    </ul>
+        <ul class="weather-details">
+            <li>Vind: <span id="wind"></span></li>
+            <li>Luftfugtighed: <span id="humidity"></span></li>
+            <li>Regnrisiko: <span id="rain-risk"></span></li>
+        </ul>
 
-     <!-- Tøjanbefaling -->
-    <section id="clothing-advice" class="clothing-card">
-        <h2>Tøjanbefaling</h2>
+        <!-- Tøjanbefaling -->
+        <section id="clothing-advice" class="clothing-card">
+            <h2>Tøjanbefaling</h2>
 
-        <div class="bear-image">
-            <img src="images/bamse_shorts-tshirt.png"
-                 alt="Bamse med shorts og t-shirt"
-                 id="bear-image">
-        </div>
+            <div class="bear-image">
+                <img src="images/bamse_shorts-tshirt.png" alt="Bamse med shorts og t-shirt" id="bear-image">
+            </div>
 
-        <div class="advice-text">
-            <h3>Bamsens anbefaling</h3>
-            <p id="clothing-text">Husk solcremen i dag!</p>
-        </div>
+            <div class="advice-text">
+                <h3>Bamsens anbefaling</h3>
+                <p id="clothing-text">Husk solcremen i dag!</p>
+            </div>
+        </section>
+
     </section>
-      
-    </section>
-
-
-
-</div>
-
-</section>
-
-    <script src="weather.js"></script>
+    <script type="module" src="js/weather.js"></script>
 </body>
 
 </html>

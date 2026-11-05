@@ -1,3 +1,5 @@
+import { getClothingRecommendation } from "./clothing.js";
+
 const key = 'fb005a8552253eeee41503852feb5117';
 const url = "https://api.openweathermap.org/data/2.5";
 
@@ -60,7 +62,7 @@ async function getWeather(query) {
 function renderWeather(current, forecast) {
     const temp = current.main.temp;
     const { main, description, icon } = current.weather[0];
-    const windKmh = Math.round(current.wind.speed * 3.6); // m/s -> km/t
+    const windKmh = Math.round(current.wind.speed * 3.6);
     const rainChance = Math.round(forecast.list[0].pop * 100);
 
     document.querySelector("#city").textContent = current.name;
@@ -70,6 +72,9 @@ function renderWeather(current, forecast) {
     document.querySelector("#wind").textContent = `${windKmh} km/t`;
     document.querySelector("#humidity").textContent = `${current.main.humidity} %`;
     document.querySelector("#rain-risk").textContent = `${rainChance} %`;
+
+    const recommendation = getClothingRecommendation({ temp, main, windKmh, rainChance });
+    document.querySelector("#clothing-text").textContent = recommendation.join(", ");
 
     weatherEl.hidden = false;
 }
