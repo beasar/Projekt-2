@@ -6,40 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navn</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <script src="js/weather.js" defer></script>
 
 <body>
+    <!-- Header m. titel og søgeformular-->
+   <header class="main-header">
     <h1>Velkommen til Navn</h1>
-    <p>Din personlige vejr- og tøjrådgiver</p>
+    <p>Vejret fortalt med lidt ekstra varme</p>
 
-    <h1>Vejret i <span id="city">...</span></h1>
-
+    <!--Søgeformular for byer-->
     <form id="search-form">
         <input id="city-input" placeholder="Indtast en by (fx. Aarhus)" />
         <button type="submit">Søg</button>
     </form>
 
     <p id="status"></p>
-
-    <!-- Vejrdata -->
+</header>
+<!-- Bynavn -->
+    <h1><span id="city">...</span></h1>
+     <!-- Vejrdata -->
     <section id="weather" class="weather-card" hidden>
-        <h2>Vejret i dag</h2>
-        <p id="icon"></p>
+        
+
+        <div class="weather-icon">
         <p id="temp"></p>
+        <p id="icon"></p>
         <p id="description"></p>
+        </div>
 
-        <ul>
-            <li>Vind: <span id="wind"></span></li>
-            <li>Luftfugtighed: <span id="humidity"></span></li>
-            <li>Regnrisiko: <span id="rain-risk"></span></li>
-        </ul>
-    </section>
+          <ul class="weather-details">
+        <li>Vind: <span id="wind"></span></li>
+        <li>Luftfugtighed: <span id="humidity"></span></li>
+        <li>Regnrisiko: <span id="rain-risk"></span></li>
+    </ul>
 
-    <!-- Vejr og tøjanbefaling -->
-<div class="dashboard-sections">
-
-    <!-- Tøjanbefaling -->
+     <!-- Tøjanbefaling -->
     <section id="clothing-advice" class="clothing-card">
         <h2>Tøjanbefaling</h2>
 
@@ -54,6 +57,10 @@
             <p id="clothing-text">Husk solcremen i dag!</p>
         </div>
     </section>
+      
+    </section>
+
+
 
 </div>
 

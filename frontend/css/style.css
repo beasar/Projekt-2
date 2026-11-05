@@ -39,9 +39,7 @@ p {
     font-family: "Iosevka Charon", sans-serif;
     font-size: 17px;
     font-weight: 500;
-    line-height: 1.7;
 }
-
 
 
 input {
@@ -50,6 +48,8 @@ input {
     border: 1px solid #cbd5e1;
     border-radius: 6px;
 }
+
+/* Knapper */   
 
 button {
     padding: 12px 25px;
@@ -78,6 +78,71 @@ button:active {
     box-shadow: 0 2px 0 #B98235;
 }
 
+/* Container til velkomstbesked */
+.header {
+    width: 100%;
+    padding: 20px;
+    margin: 0;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Grader ikon sektion*/
+
+.weather-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+.weather-icon {
+    grid-column: 2;
+    text-align: center;
+}
+
+.weather-details {
+    list-style: none;
+    grid-column: 3;
+}
+
+.weather-details li {
+    padding: 18px;
+    margin-bottom: 15px;
+    border-radius: 18px;
+
+    background: rgba(161, 189, 201, 0.5);
+    border: 2px solid #F5E5C5;
+
+    box-shadow:
+        0 4px 0 #8CAAB5,
+        0 7px 12px rgba(65, 75, 75, 0.12);
+
+    text-align: center;
+}
+
+#temp {
+    font-size: 120px;
+    font-weight: 500;
+    font-family: "Quicksand", sans-serif;
+    letter-spacing: -3px;
+    line-height: 1;
+    margin: 0;
+    width: 100%;
+    color: #665348;
+    text-shadow: 3px 4px 0px rgba(102, 83, 72, 0.12);
+}
+
+#icon,
+#description {
+    margin: 0;
+    font-size: 30px;
+}
+    
+
+
 /* Dashboard-sektioner */ 
 
 .dashboard-sections {
@@ -89,23 +154,24 @@ button:active {
     margin: 30px auto;
 }
 
+/* Tøj-anbefaling */
 
 .clothing-card {
-    flex: 1;
-    min-width: 0;
+  
+    grid-column: 3;
+    width: 90%;
+    padding: 25px;
     box-sizing: border-box;
 
-    padding: 28px;
-    border-radius: 24px;
 
     background: rgba(161, 189, 201, 0.5);
-
-    border: 3px solid #F5E5C5;
+    border: 2px solid #F5E5C5;
 
     box-shadow:
-        0 6px 0 #8CAAB5,
-        0 10px 20px rgba(65, 75, 75, 0.12);
+        0 4px 0 #8CAAB5,
+        0 7px 14px rgba(65, 75, 75, 0.10);
 
+    text-align: center;
     transition: transform 0.25s ease;
 }
 
