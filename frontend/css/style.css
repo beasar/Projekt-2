@@ -253,6 +253,7 @@ button:active {
 
 .forecast {
     grid-column: 1;
+    grid-row: 1;
     position: relative;
 }
 
@@ -358,80 +359,61 @@ button:active {
    RESPONSIVITET
 ===================================== */
 
-@media (max-width: 1533px) {
-    .bear-image {
-        width: 450px;
-        right: 1%;
-    }
+@media (max-width: 1540px) {
+    #clothing-advice {
+        grid-column: 2;
+        grid-row: 2;
+        margin-top: 30px;
 
-    #bear-image {
-        max-height: 55vh;
-    }
-}
-
-@media (max-width: 1302px) {
-    .bear-image {
-        width: 440px;
-        right: 0;
-    }
-
-    #bear-image {
-        max-height: 55vh;
+        h2 {
+            font-size: 24px;
+        }
     }
 }
 
-@media (max-width: 1281px) {
-    .bear-image {
-        width: 440px;
-        right: 0;
-    }
 
-    #bear-image {
-        max-height: 55vh;
-    }
-}
+/* Mobil */
 
-/* =====================================
-   TABLET OG MOBIL
-===================================== */
+
+
+
 
 @media (max-width: 813px) {
 
     .weather-card {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-        align-items: center;
+grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);        align-items: center;
         gap: 5px;
         width: 100%;
         padding: 0 8px;
     }
 
+    /* Temperatur i midten */
     .weather-icon {
         grid-column: 2;
         text-align: center;
         align-self: center;
     }
+.weather-details,
+.forecast {
+    width: 100%;
+    min-width: 0;
 
-    .weather-details,
-    .forecast {
-        width: 100%;
-        min-width: 0;
-    }
-
-    .forecast h2 {
+    h2{
         font-size: 18px;
         text-align: center;
     }
-
+}
     .weather-details li,
-    .forecast-list li {
-        padding: 5px 4px;
-        width: 196px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 5px;
-        line-height: 1.2;
-    }
+.forecast-list li {
+    padding: 5px 4px;
+    width: 196px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    line-height: 1.2;
+    gap: 30px;
+}
 
     #temp {
         font-size: 110px;
@@ -443,36 +425,31 @@ button:active {
         font-size: 20px;
     }
 
-    .bear-image {
-        position: fixed;
-        right: -120px;
-        left: auto;
-        bottom: 0;
-        width: 600px;
-        max-width: 95vw;
-        max-height: 365vh;
-        z-index: 10;
-    }
 
-    #bear-image {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-    }
 
-    .user-menu {
-        top: 10px;
-        right: 10px;
-        gap: 7px;
-        padding: 7px 9px;
-    }
+/*Bamsens placering og størrelse*/
+
+.bear-image {
+    position: fixed;
+    right: -120px;
+    left: auto;
+    bottom: 0;
+    width: 600px;
+    max-width: 95vw;
+    max-height: 365vh;
+    z-index: 10;
 }
 
-/* =====================================
-   MINDRE MOBILER
-===================================== */
+#bear-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}}
 
-@media (max-width: 625px) {
+/* Mobil mindre  */
+
+@media (max-width: 680px) {
+  
 
     .weather-details,
     .forecast {
@@ -498,19 +475,29 @@ button:active {
         font-size: 80px;
         padding-right: 26px;
     }
+
+    #clothing-advice {
+        margin-top: 30px;
+
+        h2 {
+            font-size: 16px;
+        }
+    }
 }
 
-@media (max-width: 549px) {
 
-    .weather-card {
-        grid-template-columns: 140px minmax(0, 1fr) 150px;
-        gap: 5px;
+
+
+@media (max-width: 549px) {
+     .weather-card {
+         grid-template-columns: 140px minmax(0, 1fr) 150px;
+    gap: 5px;
     }
 
     .weather-details,
     .forecast {
-        width: 100%;
-        min-width: 0;
+     width: 100%;
+    min-width: 0;
     }
 
     .forecast h2 {
@@ -522,8 +509,8 @@ button:active {
     .weather-details li,
     .forecast-list li {
         width: 100%;
-        padding: 4px 1px;
-        font-size: 9px;
+    padding: 4px 1px;
+    font-size: 9px;
         margin-bottom: 5px;
         border-radius: 8px;
     }
@@ -543,9 +530,9 @@ button:active {
         font-size: 16px;
     }
 }
+ 
 
 @media (max-width: 444px) {
-
     .weather-card {
         grid-template-columns: 1fr auto 1fr;
         gap: 5px;
@@ -576,7 +563,7 @@ button:active {
     }
 
     .weather-icon {
-        gap: 0;
+        gap: -12px;
     }
 
     #temp {
@@ -590,7 +577,10 @@ button:active {
         font-size: 14px;
         padding: 0;
         margin-top: 0;
+
     }
+}
+
 
     .user-menu {
         top: 8px;
@@ -608,4 +598,3 @@ button:active {
         padding: 7px 12px;
         font-size: 13px;
     }
-}
