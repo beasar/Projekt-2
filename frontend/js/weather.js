@@ -37,7 +37,7 @@ async function getWeather(query) {
     try {
         const [currentRes, forecastRes] = await Promise.all([
             fetch(`${url}/weather?${params}`),
-            fetch(`${url}/forecast?${params}&cnt=1`),
+            fetch(`${url}/forecast?${params}&cnt=8`),
         ]);
 
         if (currentRes.status === 404) {
@@ -76,7 +76,34 @@ function renderWeather(current, forecast) {
     const recommendation = getClothingRecommendation({ temp, main, windKmh, rainChance });
     document.querySelector("#clothing-text").textContent = recommendation.join(", ");
 
+    const offset = forecast.city.timezone;
+    const slots = getTodaySlots(current, forecast);
+
+    renderTitle(current, offset);
+    renderForecast(slots, offset);
+
     weatherEl.hidden = false;
+}
+
+function renderForecast(slots, offset) {
+    const listEl = document.querySelector("#forecast-list");
+    listEl.innerHTML = "";
+
+    slots.forEach((slot) => {
+        const local = toLocal(slot.dt, offset);
+        const { main, icon } = slot.weather[0];
+        const temp = slot.main.temp;
+
+        const li = document.createElement("li");
+        li.className = "forecast-item";
+        li.innerHTML = `
+            <span class="forecast-time">${formatHour(local)}</span>
+            <span class="forecast-icon">${getIcon(main, temp, icon)}</span>
+            <span class="forecast-temp">${Math.round(temp)} °C</span>
+            <span class="forecast-rain">💧 ${Math.round(slot.pop * 100)} %</span>
+        `;
+        listEl.append(li);
+    });
 }
 
 function getWeatherFromLocation() {
@@ -97,6 +124,50 @@ function getWeatherFromLocation() {
         },
         { timeout: 10000 }
     );
+}
+
+function toLocal(timestamp, offset) {
+    // Shifted by the city's offset, so read it with the getUTC* methods
+    return new Date((timestamp + offset) * 1000);
+}
+
+function dateKey(date) {
+    return date.toISOString().slice(0, 10); // "2026-11-05"
+}
+
+function formatHour(date) {
+    return `${String(date.getUTCHours()).padStart(2, "0")}:00`;
+}
+
+function getTodaySlots(current, forecast) {
+    const offset = forecast.city.timezone;
+    const today = dateKey(toLocal(current.dt, offset));
+
+    const slots = forecast.list.filter(
+        (slot) => dateKey(toLocal(slot.dt, offset)) === today
+    );
+
+    // Late in the evening there may be no slots left today
+    return slots.length > 0 ? slots : forecast.list.slice(0, 4);
+}
+
+function formatTime(date) {
+    const h = String(date.getUTCHours()).padStart(2, "0");
+    const m = String(date.getUTCMinutes()).padStart(2, "0");
+    return `${h}:${m}`;
+}
+
+function renderTitle(current, offset) {
+    const now = toLocal(current.dt, offset);
+
+    let weekday = now.toLocaleDateString("da-DK", {
+        weekday: "long",
+        timeZone: "UTC",
+    });
+    weekday = weekday.charAt(0).toUpperCase() + weekday.slice(1);
+
+    document.querySelector("#day-range").textContent =
+        `${weekday} ${formatTime(now)}`;
 }
 
 document.querySelector("#search-form").addEventListener("submit", (event) => {

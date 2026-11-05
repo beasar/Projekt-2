@@ -24,10 +24,9 @@
         <p id="status"></p>
     </header>
     <!-- Bynavn -->
-    <h1><span id="city">...</span></h1>
+    <h1>Vejret i <span id="city">...</span>, <span id="day-range">...</span></h1>
     <!-- Vejrdata -->
     <section id="weather" class="weather-card" hidden>
-
 
         <div class="weather-icon">
             <p id="temp"></p>
@@ -40,6 +39,11 @@
             <li>Luftfugtighed: <span id="humidity"></span></li>
             <li>Regnrisiko: <span id="rain-risk"></span></li>
         </ul>
+
+        <section class="forecast">
+            <h2>Resten af dagen</h2>
+            <ul id="forecast-list" class="forecast-list"></ul>
+        </section>
 
         <!-- Tøjanbefaling -->
         <section id="clothing-advice" class="clothing-card">
