@@ -44,15 +44,16 @@ p {
 
 input {
     padding: 12px;
-    width: 250px;
+    width: 200px;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
+    font-family: "quicksand", sans-serif;
 }
 
 /* Knapper */   
 
 button {
-    padding: 12px 25px;
+    padding: 10px 25px;
     background-color: #E8B85C;
     color: #5B4636;
     border: 2px solid #C99543;
@@ -78,14 +79,6 @@ button:active {
     box-shadow: 0 2px 0 #B98235;
 }
 
-/* Container til velkomstbesked */
-.header {
-    width: 100%;
-    padding: 20px;
-    margin: 0;
-    text-align: center;
-    box-sizing: border-box;
-}
 
 /* Grader ikon sektion*/
 
@@ -95,12 +88,13 @@ button:active {
     align-items: center;
     gap: 20px;
     max-width: 1000px;
-    margin: 30px auto;
+    margin: 0px auto;
 }
 
 .weather-icon {
     grid-column: 2;
     text-align: center;
+    align-self: start;
 }
 
 .weather-details {
@@ -120,14 +114,14 @@ button:active {
         0 4px 0 #8CAAB5,
         0 7px 12px rgba(65, 75, 75, 0.12);
 
-    text-align: center;
+    text-align: start;
 }
 
 #temp {
-    font-size: 120px;
+    font-size: 140px;
     font-weight: 500;
     font-family: "Quicksand", sans-serif;
-    letter-spacing: -3px;
+    letter-spacing: -14px;
     line-height: 1;
     margin: 0;
     width: 100%;
@@ -143,36 +137,41 @@ button:active {
     
 
 
-/* Dashboard-sektioner */ 
-
-.dashboard-sections {
-    display: flex;
-    gap: 30px;
-    justify-content: flex-start;
-    width: 800px;
-    max-width: 90%;
-    margin: 30px auto;
-}
-
 /* Tøj-anbefaling */
 
 .clothing-card {
   
     grid-column: 3;
-    width: 90%;
-    padding: 25px;
+    width: 100%;
+    padding: 15px 14px;
     box-sizing: border-box;
-
+    
+    border-radius: 18px;
 
     background: rgba(161, 189, 201, 0.5);
     border: 2px solid #F5E5C5;
 
     box-shadow:
         0 4px 0 #8CAAB5,
-        0 7px 14px rgba(65, 75, 75, 0.10);
+        0 7px 12px rgba(65, 75, 75, 0.12);
 
-    text-align: center;
+    text-align: start;
     transition: transform 0.25s ease;
+
+    .advice-text p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.4;
+}
+h2 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+}
+    
+    h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+}
 }
 
 
@@ -195,3 +194,81 @@ button:active {
     max-height: 65vh;
     object-fit: contain;
 }
+
+
+/* Responsivitet */
+
+/* Tablet */
+
+
+/* Mobil */
+
+
+@media (max-width: 768px) {
+
+    .weather-card {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 5px;
+        width: 100%;
+        padding: 0 8px;
+    }
+
+    /* Temperatur i midten */
+    .weather-icon {
+        grid-column: 2;
+        text-align: center;
+        align-self: center;
+    }
+
+    #temp {
+        font-size: 110px;
+        letter-spacing: -10px;
+    }
+
+    #icon,
+    #description {
+        font-size: 20px;
+    }
+
+    /* Små vejrbokse til højre */
+    .weather-details {
+        grid-column: 3;
+        justify-self: end;
+        width: 115px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .weather-details li {
+        padding: 4px 5px;
+        margin-bottom: 5px;
+        font-size: 11px;
+        line-height: 1.2;
+        border-radius: 9px;
+        text-align: center;
+    }
+
+    .weather-details li span {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+/*Bamsens placering og størrelse*/
+.bear-image {
+    position: fixed;
+    right: -120px;
+    left: auto;
+    bottom: 0;
+    width: 600px;
+    max-width: 95vw;
+    max-height: 365vh;
+    z-index: 10;
+}
+
+#bear-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}}
