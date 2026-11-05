@@ -1,4 +1,4 @@
-import { getClothingRecommendation, vaelgBamse } from "./clothing.js";
+import { getClothingRecommendation } from "./clothing.js";
 
 const key = "fb005a8552253eeee41503852feb5117";
 const url = "https://api.openweathermap.org/data/2.5";
@@ -91,10 +91,6 @@ function renderWeather(current, forecast) {
 
     renderTitle(current, offset);
     renderForecast(slots, offset);
-
-    // Opdaterer bamsens billede efter temperatur og vejr
-    const bamseBillede = vaelgBamse(temp, main);
-    document.querySelector("#bear-image").src = bamseBillede;
 
     weatherEl.hidden = false;
 }
