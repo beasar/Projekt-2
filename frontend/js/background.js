@@ -10,7 +10,7 @@ export function skiftBaggrund(temp, vejr) {
   } else if (vejr === "Clear" && temp >= 15) {
     billede = "baggrund_dagsolskin.png";
   } else {
-    billede = "baggrund_efterår.png";
+    billede = "baggrund_sommer.png";
   }
 
   // Viser hvilket billede der bliver valgt
