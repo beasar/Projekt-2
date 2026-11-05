@@ -1,4 +1,4 @@
-import { getClothingRecommendation, vælgBamse } from "./clothing.js";
+import { getClothingRecommendation, vaelgBamse } from "./clothing.js";
 
 const key = "fb005a8552253eeee41503852feb5117";
 const url = "https://api.openweathermap.org/data/2.5";
@@ -31,92 +31,95 @@ function getIcon(main, temp, iconCode) {
 }
 
 async function getWeather(query) {
-  statusEl.textContent = "Henter vejret...";
-  const params = `${query}&units=metric&lang=da&appid=${key}`;
+    statusEl.textContent = "Henter vejret...";
+    const params = `${query}&units=metric&lang=da&appid=${key}`;
 
-  try {
-    const [currentRes, forecastRes] = await Promise.all([
-      fetch(`${url}/weather?${params}`),
-      fetch(`${url}/forecast?${params}&cnt=8`),
-    ]);
+    try {
+        const [currentRes, forecastRes] = await Promise.all([
+            fetch(`${url}/weather?${params}`),
+            fetch(`${url}/forecast?${params}&cnt=8`)
+        ]);
 
-    if (currentRes.status === 404) {
-      statusEl.textContent = "Byen blev ikke fundet.";
-      return;
+        if (currentRes.status === 404) {
+            statusEl.textContent = "Byen blev ikke fundet.";
+            return;
+        }
+
+        if (!currentRes.ok || !forecastRes.ok) {
+            throw new Error(
+                `Request failed: ${currentRes.status} / ${forecastRes.status}`
+            );
+        }
+
+        const current = await currentRes.json();
+        const forecast = await forecastRes.json();
+
+        renderWeather(current, forecast);
+        statusEl.textContent = "";
+
+    } catch (error) {
+        console.error(error);
+        statusEl.textContent = "Kunne ikke hente vejret.";
     }
-    if (!currentRes.ok || !forecastRes.ok) {
-      throw new Error(
-        `Request failed: ${currentRes.status} / ${forecastRes.status}`,
-      );
-    }
-
-    const current = await currentRes.json();
-    const forecast = await forecastRes.json();
-
-    renderWeather(current, forecast);
-    statusEl.textContent = "";
-  } catch (error) {
-    console.error(error);
-    statusEl.textContent = "Kunne ikke hente vejret.";
-  }
 }
 
 function renderWeather(current, forecast) {
-  const temp = current.main.temp;
-  const { main, description, icon } = current.weather[0];
-  const windKmh = Math.round(current.wind.speed * 3.6);
-  const rainChance = Math.round(forecast.list[0].pop * 100);
+    const temp = current.main.temp;
+    const { main, description, icon } = current.weather[0];
+    const windKmh = Math.round(current.wind.speed * 3.6);
+    const rainChance = Math.round(forecast.list[0].pop * 100);
 
-  document.querySelector("#city").textContent = current.name;
-  document.querySelector("#icon").textContent = getIcon(main, temp, icon);
-  document.querySelector("#temp").textContent = `${Math.round(temp)} °C`;
-  document.querySelector("#description").textContent = description;
-  document.querySelector("#wind").textContent = `${windKmh} km/t`;
-  document.querySelector("#humidity").textContent =
-    `${current.main.humidity} %`;
-  document.querySelector("#rain-risk").textContent = `${rainChance} %`;
+    document.querySelector("#city").textContent = current.name;
+    document.querySelector("#icon").textContent = getIcon(main, temp, icon);
+    document.querySelector("#temp").textContent = `${Math.round(temp)} °C`;
+    document.querySelector("#description").textContent = description;
+    document.querySelector("#wind").textContent = `${windKmh} km/t`;
+    document.querySelector("#humidity").textContent = `${current.main.humidity} %`;
+    document.querySelector("#rain-risk").textContent = `${rainChance} %`;
 
-  const recommendation = getClothingRecommendation({
-    temp,
-    main,
-    windKmh,
-    rainChance,
-  });
-  document.querySelector("#clothing-text").textContent =
-    recommendation.join(", ");
+    const recommendation = getClothingRecommendation({
+        temp,
+        main,
+        windKmh,
+        rainChance
+    });
 
-  const offset = forecast.city.timezone;
-  const slots = getTodaySlots(current, forecast);
+    document.querySelector("#clothing-text").textContent = recommendation.join(", ");
 
-  renderTitle(current, offset);
-  renderForecast(slots, offset);
+    const offset = forecast.city.timezone;
+    const slots = getTodaySlots(current, forecast);
 
-  // Opdaterer bamsens billede efter temperatur og vejr
-  const bamseBillede = vælgBamse(temp, main);
-  document.querySelector("#bear-image").src = bamseBillede;
+    renderTitle(current, offset);
+    renderForecast(slots, offset);
 
-  weatherEl.hidden = false;
+    // Opdaterer bamsens billede efter temperatur og vejr
+    const bamseBillede = vaelgBamse(temp, main);
+    document.querySelector("#bear-image").src = bamseBillede;
+
+    weatherEl.hidden = false;
 }
 
 function renderForecast(slots, offset) {
-  const listEl = document.querySelector("#forecast-list");
-  listEl.innerHTML = "";
+    const listEl = document.querySelector("#forecast-list");
+    listEl.innerHTML = "";
 
-  slots.forEach((slot) => {
-    const local = toLocal(slot.dt, offset);
-    const { main, icon } = slot.weather[0];
-    const temp = slot.main.temp;
+    slots.forEach((slot) => {
+        const local = toLocal(slot.dt, offset);
+        const { main, icon } = slot.weather[0];
+        const temp = slot.main.temp;
 
-    const li = document.createElement("li");
-    li.className = "forecast-item";
-    li.innerHTML = `
+        const li = document.createElement("li");
+        li.className = "forecast-item";
+
+        li.innerHTML = `
             <span class="forecast-time">${formatHour(local)}</span>
             <span class="forecast-icon">${getIcon(main, temp, icon)}</span>
             <span class="forecast-temp">${Math.round(temp)} °C</span>
             <span class="forecast-rain">💧 ${Math.round(slot.pop * 100)} %</span>
         `;
-    listEl.append(li);
-  });
+
+        listEl.append(li);
+    });
 }
 
 function getWeatherFromLocation() {
@@ -141,55 +144,106 @@ function getWeatherFromLocation() {
 }
 
 function toLocal(timestamp, offset) {
-  // Shifted by the city's offset, so read it with the getUTC* methods
-  return new Date((timestamp + offset) * 1000);
+    return new Date((timestamp + offset) * 1000);
 }
 
 function dateKey(date) {
-  return date.toISOString().slice(0, 10); // "2026-11-05"
+    return date.toISOString().slice(0, 10);
 }
 
 function formatHour(date) {
-  return `${String(date.getUTCHours()).padStart(2, "0")}:00`;
+    return `${String(date.getUTCHours()).padStart(2, "0")}:00`;
 }
 
 function getTodaySlots(current, forecast) {
-  const offset = forecast.city.timezone;
-  const today = dateKey(toLocal(current.dt, offset));
+    const offset = forecast.city.timezone;
+    const today = dateKey(toLocal(current.dt, offset));
 
-  const slots = forecast.list.filter(
-    (slot) => dateKey(toLocal(slot.dt, offset)) === today,
-  );
+    const slots = forecast.list.filter(
+        (slot) => dateKey(toLocal(slot.dt, offset)) === today
+    );
 
-  // Late in the evening there may be no slots left today
-  return slots.length > 0 ? slots : forecast.list.slice(0, 4);
+    return slots.length > 0 ? slots : forecast.list.slice(0, 4);
 }
 
 function formatTime(date) {
-  const h = String(date.getUTCHours()).padStart(2, "0");
-  const m = String(date.getUTCMinutes()).padStart(2, "0");
-  return `${h}:${m}`;
+    const h = String(date.getUTCHours()).padStart(2, "0");
+    const m = String(date.getUTCMinutes()).padStart(2, "0");
+    return `${h}:${m}`;
 }
 
 function renderTitle(current, offset) {
-  const now = toLocal(current.dt, offset);
+    const now = toLocal(current.dt, offset);
 
-  let weekday = now.toLocaleDateString("da-DK", {
-    weekday: "long",
-    timeZone: "UTC",
-  });
-  weekday = weekday.charAt(0).toUpperCase() + weekday.slice(1);
+    let weekday = now.toLocaleDateString("da-DK", {
+        weekday: "long",
+        timeZone: "UTC",
+    });
 
-  document.querySelector("#day-range").textContent =
-    `${weekday} ${formatTime(now)}`;
+    weekday = weekday.charAt(0).toUpperCase() + weekday.slice(1);
+
+    document.querySelector("#day-range").textContent =
+        `${weekday} ${formatTime(now)}`;
 }
 
+// Søg efter en by
 document.querySelector("#search-form").addEventListener("submit", (event) => {
-  event.preventDefault();
-  const city = document.querySelector("#city-input").value.trim();
-  if (city) {
-    getWeather(`q=${encodeURIComponent(city)}`);
-  }
+    event.preventDefault();
+
+    const city = document.querySelector("#city-input").value.trim();
+
+    if (city) {
+        getWeather(`q=${encodeURIComponent(city)}`);
+    }
 });
 
+// Hent vejret ved hjælp af brugerens lokation
 getWeatherFromLocation();
+
+
+// ===================================
+// LOGIN OG LOGOUT
+// ===================================
+
+const username = localStorage.getItem("username");
+
+const welcomeUsername = document.getElementById("welcome-username");
+const loginLink = document.getElementById("login-link");
+const loginStatus = document.getElementById("login-status");
+const logoutButton = document.getElementById("logout-button");
+
+if (username) {
+    welcomeUsername.textContent = username;
+
+    loginLink.hidden = true;
+    loginStatus.hidden = false;
+    logoutButton.hidden = false;
+
+    loginStatus.textContent = "Du er logget ind";
+} else {
+    welcomeUsername.textContent = "VejrApp";
+
+    loginLink.hidden = false;
+    loginStatus.hidden = true;
+    logoutButton.hidden = true;
+}
+
+// Logout-popup
+const logoutModal = document.getElementById("logout-modal");
+const cancelLogout = document.getElementById("cancel-logout");
+const confirmLogout = document.getElementById("confirm-logout");
+
+logoutButton.addEventListener("click", () => {
+    logoutModal.hidden = false;
+});
+
+cancelLogout.addEventListener("click", () => {
+    logoutModal.hidden = true;
+});
+
+confirmLogout.addEventListener("click", () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("userId");
+
+    window.location.href = "index.html";
+});

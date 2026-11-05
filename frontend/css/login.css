@@ -1,4 +1,5 @@
 
+/* GENERELT */
 * {
     margin: 0;
     padding: 0;
@@ -12,10 +13,15 @@ body {
     color: #193653;
 }
 
+/* HOVEDLAYOUT */
 .login-container {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 40px;
+    padding: 50px;
     background: linear-gradient(
         135deg,
         #bce5ff,
@@ -24,233 +30,218 @@ body {
     );
 }
 
+/* VENSTRE SIDE MED BAMSE */
 .bear-section {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px;
-    overflow: hidden;
+    text-align: center;
+    max-width: 500px;
 }
 
 .bear-image {
-    width: 380px;
-    max-width: 85%;
-    max-height: 65vh;
+    width: 280px;
+    max-width: 80%;
+    height: auto;
     object-fit: contain;
-    position: relative;
-    z-index: 2;
-    filter: drop-shadow(0 12px 12px rgba(31, 75, 110, 0.15));
-}
-
-.bear-text {
-    text-align: center;
-    margin-top: 20px;
-    max-width: 420px;
-    z-index: 2;
+    margin: 25px 0;
 }
 
 .bear-text h2 {
-    font-size: 28px;
-    margin-bottom: 12px;
+    font-size: 30px;
+    margin-bottom: 15px;
+    color: #193653;
 }
 
 .bear-text p {
     font-size: 17px;
-    color: #365b7e;
     line-height: 1.6;
+    color: #365c7c;
 }
 
-
-.weather-icon {
+/* VEJRIKONER */
+.weather-icon,
+.weahter-icon {
     position: absolute;
-    font-size: 65px;
-    z-index: 1;
+    font-size: 30px;
 }
 
-.sun {
-    top: 9%;
-    left: 12%;
+.weather-icon.sun,
+.weahter-icon.sun {
+    top: 20px;
+    left: 20px;
 }
 
-.rain {
-    top: 25%;
-    right: 10%;
+.weather-icon.rain {
+    top: 100px;
+    right: 20px;
 }
 
-.snow {
-    bottom: 15%;
-    right: 12%;
+.weather-icon.snow {
+    bottom: 100px;
+    left: 10px;
 }
 
-
+/* HØJRE SIDE */
 .form-section {
+    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 40px;
+    align-items: center;
 }
 
 .login-card {
     width: 100%;
-    max-width: 520px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 55px 45px;
-    border-radius: 30px;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(30, 75, 115, 0.15);
+    max-width: 430px;
+    padding: 45px;
+    background: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(25, 54, 83, 0.15);
 }
 
-
+/* LOGO */
 .logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 35px;
+    gap: 10px;
+    margin-bottom: 30px;
 }
 
 .logo span {
-    font-size: 42px;
+    font-size: 35px;
 }
 
 .logo h1 {
-    font-size: 38px;
-    color: #183b62;
+    font-size: 32px;
+    color: #1680e8;
 }
 
-
+/* TEKST */
 .login-card h2 {
-    font-size: 36px;
+    font-size: 26px;
     margin-bottom: 12px;
+    text-align: center;
 }
 
 .subtitle {
-    font-size: 18px;
-    color: #64748b;
-    margin-bottom: 45px;
+    text-align: center;
+    color: #718096;
+    margin-bottom: 30px;
+    line-height: 1.5;
 }
 
-
+/* FORMULAR */
 #loginForm {
     display: flex;
     flex-direction: column;
-    text-align: left;
     gap: 12px;
 }
 
 #loginForm label {
-    font-size: 18px;
     font-weight: bold;
+    font-size: 15px;
 }
 
 #loginForm input {
-    padding: 19px;
-    border: 2px solid #c5d9eb;
-    border-radius: 14px;
-    font-size: 17px;
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #d8e6f2;
+    border-radius: 12px;
+    font-size: 16px;
     outline: none;
     transition: border 0.2s;
 }
 
 #loginForm input:focus {
-    border-color: #3285d1;
+    border-color: #1680e8;
 }
 
-#loginForm button {
-    margin-top: 18px;
-    padding: 19px;
+/* KNAPPER */
+#submitButton,
+#switchButton {
+    padding: 14px 20px;
     border: none;
-    border-radius: 14px;
-    background: linear-gradient(90deg, #2784d9, #0875e5);
+    border-radius: 12px;
+    background: #1680e8;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
+    transition: background 0.2s;
 }
 
-#loginForm button:hover {
-    background: #075eb8;
-    transform: translateY(-2px);
+#submitButton:hover,
+#switchButton:hover {
+    background: #0968c5;
 }
 
-.register-section {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #dce7f0;
+#submitButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* BESKEDER */
+.form-message {
+    margin-top: 15px;
     text-align: center;
+    color: #1680e8;
+    font-weight: bold;
+    min-height: 20px;
+}
+
+/* OPRET BRUGER */
+.register-section {
+    text-align: center;
+    margin-top: 25px;
 }
 
 .register-section p {
-    color: #64748b;
-    margin-bottom: 15px;
-    font-size: 15px;
+    color: #718096;
+    margin-bottom: 12px;
 }
 
 #switchButton {
     width: 100%;
-    padding: 15px;
     background: white;
     color: #1680e8;
     border: 2px solid #1680e8;
-    border-radius: 12px;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
 }
 
 #switchButton:hover {
     background: #eaf4ff;
 }
 
-
-.form-message {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #2563eb;
-    text-align: center;
-}
-
 .login-info {
+    text-align: center;
     margin-top: 25px;
-    color: #64748b;
-    font-size: 15px;
+    font-size: 13px;
+    color: #94a3b8;
 }
 
-
+/* MOBIL OG TABLET */
 @media (max-width: 800px) {
-
     .login-container {
         grid-template-columns: 1fr;
-    }
-
-    .bear-section {
-        min-height: 400px;
-        padding: 25px;
+        padding: 30px 20px;
+        gap: 30px;
     }
 
     .bear-image {
-        width: 240px;
-        max-height: 300px;
+        width: 180px;
     }
 
     .bear-text h2 {
-        font-size: 23px;
+        font-size: 24px;
     }
 
-    .form-section {
-        padding: 20px;
+    .bear-text p {
+        font-size: 15px;
     }
 
     .login-card {
-        padding: 35px 25px;
+        padding: 30px;
     }
-
-    .login-card h2 {
-        font-size: 29px;
-    }
-
 }

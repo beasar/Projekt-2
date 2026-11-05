@@ -1,21 +1,30 @@
+
 <!DOCTYPE html>
 <html lang="da">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navn</title>
+    <title>VejrApp</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Header m. titel og søgeformular-->
+
+    <!-- Login og brugerinformation -->
+    <div class="user-menu">
+        <a id="login-link" href="login.html">Login</a>
+        <span id="login-status" hidden></span>
+        <button id="logout-button" type="button" hidden>Log ud</button>
+    </div>
+
+    <!-- Header -->
     <header class="main-header">
-        <h1>Velkommen til Navn</h1>
+        <h1>Velkommen til <span id="welcome-username">VejrApp</span></h1>
         <p>Vejret fortalt med lidt ekstra varme</p>
 
-        <!--Søgeformular for byer-->
+        <!-- Søgeformular -->
         <form id="search-form">
             <input id="city-input" placeholder="Indtast en by (fx. Aarhus)" />
             <button type="submit">Søg</button>
@@ -23,50 +32,71 @@
 
         <p id="status"></p>
     </header>
+
     <!-- Bynavn -->
-    <h1><span id="city">...</span><br><p> <span id="day-range">...</span></p></h1>
+    <h1>Vejret i <span id="city">...</span>, <span id="day-range">...</span></h1>
+
     <!-- Vejrdata -->
     <section id="weather" class="weather-card" hidden>
 
-        <!--Resten af dagen-->
-
-        <!-- Resten af dagen -->
-<section class="forecast">
-    <h2>Resten af dagen:</h2>
-    <ul id="forecast-list" class="forecast-list"></ul>
-</section>
-
-<!--Temperatur midt dashboard-->
         <div class="weather-icon">
             <p id="temp"></p>
             <p id="icon"></p>
             <p id="description"></p>
         </div>
 
-        
-<!--Vejrforhold-->
         <ul class="weather-details">
             <li>💨 Vind: <span id="wind"></span></li>
-            <li>💧 Fugtighed: <span id="humidity"></span></li>
+            <li>💧 Luftfugtighed: <span id="humidity"></span></li>
             <li>🌧️ Regnrisiko: <span id="rain-risk"></span></li>
         </ul>
 
+        <!-- Forecast -->
+        <section class="forecast">
+            <h2>Resten af dagen</h2>
+            <ul id="forecast-list" class="forecast-list"></ul>
+        </section>
 
         <!-- Tøjanbefaling -->
         <section id="clothing-advice" class="clothing-card">
             <h2>Dagens outfit</h2>
 
             <div class="bear-image">
-                <img src="images/bamse_shorts-tshirt.png" alt="Bamse med shorts og t-shirt" id="bear-image">
+                <img
+                    src="images/bamse_shorts-tshirt.png"
+                    alt="Bamse med shorts og t-shirt"
+                    id="bear-image">
             </div>
 
             <div class="advice-text">
                 <p id="clothing-text">Husk solcremen i dag!</p>
             </div>
-   
         </section>
 
-    <script type="module" src="js/weather.js"></script>
-</body>
+    </section>
 
+    <!-- Logout popup -->
+    <div id="logout-modal" class="logout-modal" hidden>
+        <div class="logout-card">
+
+            <img
+                src="images/bamse_regn.png"
+                alt="VejrApp bamse"
+                class="logout-bear">
+
+            <h2>Vil du logge ud?</h2>
+
+            <p>Er du sikker på, at du vil logge ud af VejrApp?</p>
+
+            <div class="logout-actions">
+                <button id="cancel-logout" type="button">Bliv her</button>
+                <button id="confirm-logout" type="button">Ja, log ud</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="js/weather.js"></script>
+
+</body>
 </html>
