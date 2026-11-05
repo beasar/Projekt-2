@@ -24,26 +24,33 @@
         <p id="status"></p>
     </header>
     <!-- Bynavn -->
-    <h1>Vejret i <span id="city">...</span>, <span id="day-range">...</span></h1>
+    <h1><span id="city">...</span><br><p> <span id="day-range">...</span></p></h1>
     <!-- Vejrdata -->
     <section id="weather" class="weather-card" hidden>
 
+        <!--Resten af dagen-->
+
+        <!-- Resten af dagen -->
+<section class="forecast">
+    <h2>Resten af dagen:</h2>
+    <ul id="forecast-list" class="forecast-list"></ul>
+</section>
+
+<!--Temperatur midt dashboard-->
         <div class="weather-icon">
             <p id="temp"></p>
             <p id="icon"></p>
             <p id="description"></p>
         </div>
 
+        
+<!--Vejrforhold-->
         <ul class="weather-details">
             <li>💨 Vind: <span id="wind"></span></li>
-            <li>💧 Luftfugtighed: <span id="humidity"></span></li>
+            <li>💧 Fugtighed: <span id="humidity"></span></li>
             <li>🌧️ Regnrisiko: <span id="rain-risk"></span></li>
         </ul>
 
-        <section class="forecast">
-            <h2>Resten af dagen</h2>
-            <ul id="forecast-list" class="forecast-list"></ul>
-        </section>
 
         <!-- Tøjanbefaling -->
         <section id="clothing-advice" class="clothing-card">
@@ -58,7 +65,6 @@
             </div>
         </section>
 
-    </section>
     <script type="module" src="js/weather.js"></script>
 </body>
 
