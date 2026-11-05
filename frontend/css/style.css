@@ -197,6 +197,7 @@ button:active {
     margin: 0;
     font-size: 15px;
     line-height: 1.4;
+
 }
 h2 {
     margin: 0 0 8px 0;
@@ -207,8 +208,8 @@ h2 {
     margin: 0 0 5px 0;
     font-size: 18px;
 }
-}
 
+}
 
 
 /* Bamsens placering */
@@ -216,7 +217,7 @@ h2 {
     position: fixed;
     right: 3%;
     bottom: 0;
-    width: 600px;
+    width: min(600px, 42vw);
     max-height: 65vh;
     z-index: 10;
     transform: scaleX(-1);
@@ -234,7 +235,22 @@ h2 {
 /* Responsivitet */
 
 
+@media (max-width: 1540px) {
+    #clothing-advice {
+        grid-column: 2;
+        grid-row: 2;
+        margin-top: 30px;
+
+        h2 {
+            font-size: 24px;
+        }
+    }
+}
+
+
 /* Mobil */
+
+
 
 
 
@@ -308,7 +324,7 @@ grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);        align-items: c
 
 /* Mobil mindre  */
 
-@media (max-width: 625px) {
+@media (max-width: 680px) {
   
 
     .weather-details,
@@ -336,7 +352,17 @@ grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);        align-items: c
         padding-right: 26px;
     }
 
+    #clothing-advice {
+        margin-top: 30px;
+
+        h2 {
+            font-size: 16px;
+        }
+    }
 }
+
+
+
 
 @media (max-width: 549px) {
      .weather-card {
@@ -413,7 +439,7 @@ grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);        align-items: c
     }
 
     .weather-icon {
-        gap: -10
+        gap: -12px;
     }
 
     #temp {
@@ -425,5 +451,8 @@ grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);        align-items: c
     #icon,
     #description {
         font-size: 14px;
+        padding: 0;
+        margin-top: 0;
+
     }
 }
